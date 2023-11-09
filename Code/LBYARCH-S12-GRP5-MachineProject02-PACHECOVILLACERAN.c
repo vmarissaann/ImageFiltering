@@ -31,5 +31,8 @@ int main(){
 	for (int i = 0; i < 36; ++i) {
 		printf("%d ", arr1D[i]);
 	}
+	printf("\n");
+	printf("%d ", arr1D[4]);
+	
 	return 0;
 }
