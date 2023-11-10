@@ -39,15 +39,25 @@ main:
         ;CL initialized for matrix column loop
         MOV CL, [patternCtr]
         matrix_col: 
-                   ;stores the counter for column  of matrix in colCtr as ECX as initialized for sample window loop
+                   ;stores the counter for column  of matrix in colCtr as CL as initialized for sample window ROW loop
                    MOV [matrixColCtr], CL
                    
                    ;CL initialized for ROW sample window loop
                    MOV CL, [matrix_windowsize]
-                   ;temporary counter just to check if it passes through window_row 3 times
-                   MOV EAX, 0
-                   window_row: ADD EAX,1 ; replace with array kineme later
-                              loop window_row
+                   window_row: 
+                               ;temporary counter just to check if it passes through window_col 3 times
+                              MOV EAX, 0
+                              ;stores the counter for row of matrix in windowRowCtr as CL as initialized for sample window COL loop
+                              MOV [windowRowCtr], CL
+                              ;CL initialized for COL sample window loop
+                              MOV CL, [matrix_windowsize]
+                              window_col:
+                                         ADD EAX,1 ; replace with array kineme later
+                              loop window_col
+                               ;put back window row counter
+                              MOV CL, [windowRowCtr]
+                             
+                   loop window_row
                    ;put back matrix col counter
                    MOV CL, [matrixColCtr]   
                  
