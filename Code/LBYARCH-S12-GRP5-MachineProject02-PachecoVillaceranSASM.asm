@@ -20,6 +20,14 @@ matrix_new db 1, 4, 0, 1, 3, 1, 2, 2, 4, 2, 2, 3,1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 2
 section .text
 global main
 main:
+    MOV EAX, 0
+    ;testing array only
+    MOV AL,  [matrix_new+1]
+    PRINT_DEC 1, AL
+    NEWLINE
+    MOV AL,  [matrix_new+6]
+    PRINT_DEC 1, AL
+    
     ;initialize empty counter
     MOV ECX, 0x0
     ; initializes the number of 3x3 window moves
@@ -66,7 +74,7 @@ main:
         ; put back the counter for matrix row counter
         MOV CL, [matrixRowCtr]
     loop matrix_row
-    PRINT_DEC 1, EAX
+    ;PRINT_DEC 1, EAX
     
     
     
