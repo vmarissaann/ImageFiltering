@@ -33,7 +33,9 @@ main:
                               MOV CL, [windowRowCtr]
                              
     loop window_row
+    PRINT_STRING  "Sum: "
     PRINT_DEC 1, sum
+    NEWLINE
   
    ; PRINT_DEC 1, [matrix+1]
     ;NEWLINE
