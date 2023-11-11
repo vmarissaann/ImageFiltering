@@ -1,7 +1,7 @@
 %include "io.inc"
 section .data
-numerator db 5
-denominator db 2
+numerator db 9
+denominator db 6
 section .text
 global main
 main:
