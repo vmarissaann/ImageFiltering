@@ -6,12 +6,12 @@ section .text
 global main
 main:
     MOV EDX, 0
-    MOV ECX, 0
+   ; MOV ECX, 0
     MOV AL, [numerator]
-    MOV CL, [denominator]
-    DIV ECX
+    ;MOV CL, [denominator]
+    IDIV dword [denominator]
     shl edx, 1
-    cmp edx, ecx
+    cmp edx, [denominator]
     jb .done
     add eax, 1
     .done:
