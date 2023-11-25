@@ -21,7 +21,6 @@ main:
     ;test
     MOV EBX, 1 ;should be 14
     ;MOV EBX, 3 ;should be 13
-    ; MOVZX EDX, byte [matrix + EAX]
     MOV CL, [matrix_windowsize]
     window_row:             
                               ;stores the counter for row of matrix in windowRowCtr as CL as initialized for sample window COL loop
@@ -31,9 +30,12 @@ main:
                               ;CL initialized for COL sample window loop
                               MOV CL, [matrix_windowsize]
                               window_col:
+                                         ; moves value of array into EDX
                                          MOVZX EDX, byte [matrix+EBX]
+                                         ; EDX is added into sum container
                                          ADD [sum], EDX
-                                         SUB EBX,1 ; replace with array kineme later
+                                         ;subtract such that row row 2 -> row 1 - > row 0
+                                         SUB EBX,1 
                               loop window_col
                               ADD EBX, 7 ; add 7 to proceed to next row of 3x3 window matrix
                                ;put back window row counter
@@ -61,6 +63,7 @@ main:
         .done:
         PRINT_STRING  "Average: "
         PRINT_DEC 1, eax ;replace with replacing new array with new value
+       
     
     ;once it iterates through the entire 3x3 window
     
