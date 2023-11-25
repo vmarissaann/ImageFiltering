@@ -15,7 +15,6 @@ main:
 
     ;initializing registers to be 0
     MOV EAX, 0 ; reserved for division operation
-    ;MUL
     MOV ECX, 0
     MOV EBX, 0
     MOV EDX, 0
@@ -27,6 +26,7 @@ main:
     window_row:             
                               ;stores the counter for row of matrix in windowRowCtr as CL as initialized for sample window COL loop
                               MOV [windowRowCtr], CL
+                              ; iterates through entire row starting from row 2 -> row 1 - > row 0, hence EBX +2
                               ADD EBX, 2
                               ;CL initialized for COL sample window loop
                               MOV CL, [matrix_windowsize]
@@ -35,7 +35,7 @@ main:
                                          ADD [sum], EDX
                                          SUB EBX,1 ; replace with array kineme later
                               loop window_col
-                              ADD EBX, 7
+                              ADD EBX, 7 ; add 7 to proceed to next row of 3x3 window matrix
                                ;put back window row counter
                               MOV CL, [windowRowCtr]
                              
@@ -45,22 +45,22 @@ main:
     NEWLINE
     
     ;ROUND and AVERAGE function
-    ;registers used in division operation: EAX, EDX
-    ; move sum value to AL of EAX such that it can be used for division operation
-    ; numerator = sum
-    ; denominator = sampling_window_size
-     MOV AL, [sum]
-     MOV EDX, 0
-    ; EAX <-- EAX div s32
-    ; EDX <-- EDX mod s32
-    IDIV dword [sampling_window_size]
-    shl edx, 1
-    cmp edx, [sampling_window_size]
-    jb .done
-    add eax, 1
-    .done:
-    PRINT_STRING  "Average: "
-    PRINT_DEC 1, eax ;replace with replacing new array with new value
+        ;registers used in division operation: EAX, EDX
+        ; move sum value to AL of EAX such that it can be used for division operation
+        ; numerator = sum
+        ; denominator = sampling_window_size
+         MOV AL, [sum]
+         MOV EDX, 0
+        ; EAX <-- EAX div s32
+        ; EDX <-- EDX mod s32
+        IDIV dword [sampling_window_size]
+        shl edx, 1
+        cmp edx, [sampling_window_size]
+        jb .done
+        add eax, 1
+        .done:
+        PRINT_STRING  "Average: "
+        PRINT_DEC 1, eax ;replace with replacing new array with new value
     
     ;once it iterates through the entire 3x3 window
     
