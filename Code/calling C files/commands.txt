@@ -1,0 +1,4 @@
+nasm -f win32 asmfile.asm
+gcc -c cfile.c -o cfile.obj -m32
+gcc cfile.obj asmfile.obj -o cfile.exe -m32
+cfile.exe
