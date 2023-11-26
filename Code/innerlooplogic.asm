@@ -8,18 +8,19 @@ sampling_window_size dd 9 ;should be depending on C program
 ;NOTE: should be double word integer
 matrix db 1, 4, 0, 1, 3, 1, 2, 2, 4, 2, 2, 3,1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 2, 2, 2, 5, 3, 1, 2, 5, 1, 1, 4, 2, 3, 0
 sum db 0
+matrix_size db 6
 
 section .text
 global main
 main:
-
+    ADD byte [matrix_size],1
     ;initializing registers to be 0
     MOV EAX, 0 ; reserved for division operation
     MOV ECX, 0
     MOV EBX, 0
     MOV EDX, 0
     ;test
-    MOV EBX, 1 ;should be 14
+    ;MOV EBX, 1 ;should be 14
     ;MOV EBX, 3 ;should be 13
     MOV CL, [matrix_windowsize]
     window_row:             
@@ -37,7 +38,7 @@ main:
                                          ;subtract such that row row 2 -> row 1 - > row 0
                                          SUB EBX,1 
                               loop window_col
-                              ADD EBX, 7 ; add 7 to proceed to next row of 3x3 window matrix
+                              ADD EBX, [matrix_size] ; add 7 to proceed to next row of 3x3 window matrix
                                ;put back window row counter
                               MOV CL, [windowRowCtr]
                              

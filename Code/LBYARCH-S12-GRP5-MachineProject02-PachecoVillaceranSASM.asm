@@ -22,11 +22,11 @@ global main
 main:
     MOV EAX, 0
     ;testing array only
-    MOV AL,  [matrix_new+1]
-    PRINT_DEC 1, AL
-    NEWLINE
-    MOV AL,  [matrix_new+6]
-    PRINT_DEC 1, AL
+    ;MOV AL,  [matrix_new+1]
+   ; PRINT_DEC 1, AL
+    ;NEWLINE
+    ;MOV AL,  [matrix_new+6]
+    ;PRINT_DEC 1, AL
     
     ;initialize empty counter
     MOV ECX, 0x0
@@ -77,15 +77,6 @@ main:
     ;PRINT_DEC 1, EAX
     
     
-    
-    
-    ;division
-   ; mov eax, 2296         ; dividend low half
-   ; mov edx, 0             ; dividend high half = 0.  prefer  xor edx,edx
-
-   ; mov ebx, 9            ; divisor can be any register or memory
-
-;div ebx  
     
     ;write your code here
     xor eax, eax
