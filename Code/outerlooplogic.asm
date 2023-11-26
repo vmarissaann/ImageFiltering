@@ -21,12 +21,6 @@ section .text
 global main
 main:
     MOV EAX, 0
-    ;testing array only
-    ;MOV AL,  [matrix_new+1]
-   ; PRINT_DEC 1, AL
-    ;NEWLINE
-    ;MOV AL,  [matrix_new+6]
-    ;PRINT_DEC 1, AL
     
     ;initialize empty counter
     MOV ECX, 0x0
