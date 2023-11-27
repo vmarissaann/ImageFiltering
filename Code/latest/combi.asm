@@ -59,20 +59,22 @@ main:
         MOV AL, [pattern_ctr]
         MOV [matrix_col_ctr], AL
         
-         MOV AL, [temp_ebx]
-         ADD [holder_ebx], AL
+        ;initialize row 0 -> 6 ->12..etc
+        MOV AL, [temp_ebx]
+        ADD [holder_ebx], AL
 
         matrix_col:
        
             ; CL initialized for row of window
             MOV CL, [window_size]
+            
             ; iterates from each col backwards
             ; window_size - 1
             MOV EAX, [window_size]
             SUB EAX, 1
             MOV [move_window], EAX
             
-           
+           ;moves starting index of window array to BL 0 ->1-->2 -->3
             MOV BL, [holder_ebx]
             
             window_row:
@@ -154,6 +156,7 @@ main:
         MOV AL, 0
         MOV [holder_ebx],AL
         
+        ;increment for next row in 6x6 matrix
         MOV AL, [matrix_size]
         ADD [temp_ebx], AL
         MOV BL, [temp_ebx]
