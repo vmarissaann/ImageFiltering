@@ -25,7 +25,7 @@ main:
     MOV EDX, 0
     ;Testing moving of array
     INC EBX
-        MOV EBX, 6 ;should be 14
+       ; MOV EBX, 12 ;should be 14
         ;MOV EBX, 3 ;should be 13
     MOV CL, [matrix_windowsize]
     window_row:             
