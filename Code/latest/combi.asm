@@ -54,15 +54,12 @@ main:
     
 
     matrix_row:
-        ; stores counter for row of matrix in row_ctr
-        ;MOV [matrix_row_ctr], CL
         ; CL initialized for the loop
-        INC AL
+        MOV AL, [pattern_ctr]
         MOV [matrix_col_ctr], AL
 
         matrix_col:
-            ; stores counter for column of matrix 
-            ;MOV [matrix_col_ctr], CL
+       
             ; CL initialized for row of window
             MOV CL, [window_size]
 
@@ -127,7 +124,7 @@ main:
                 PRINT_DEC 1, EAX 
                 NEWLINE
                 NEWLINE
-                MOV [avg], EBX
+                MOV [avg], BL
                 ; TODO: need to reset sum to 0 somewhere here (DONE)
                 MOV AL,0
                 MOV [sum], AL
