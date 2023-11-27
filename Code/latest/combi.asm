@@ -32,7 +32,7 @@ main:
     ; initialize matrix row incremement
     MOV EAX, [matrix_size]
     INC EAX
-    MOV [increment_row], EAX
+    MOV [increment_row], AL
 
     ; initializing registers to be 0
     MOV EAX, 0 ; reserved for division operation
@@ -62,19 +62,18 @@ main:
        
             ; CL initialized for row of window
             MOV CL, [window_size]
-
+            ; iterates from each col backwards
+            ; window_size - 1
+            MOV EAX, [window_size]
+            SUB EAX, 1
+            MOV [move_window], EAX
+            
             window_row:
                 ; stores counter for row (3)
                 MOV [window_row_ctr], CL
-
-                ; iterates from each col backwards
-                ; window_size - 1
-                MOV ECX, [window_size]
-                SUB ECX, 1
-                MOV [move_window], ECX
-        
-                ADD EBX, [move_window]
                 
+                ADD EBX, [move_window]
+       
                 ; CL initialized for column of window loop
                 MOV CL, [window_size]
 
