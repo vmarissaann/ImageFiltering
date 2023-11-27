@@ -51,11 +51,13 @@ main:
 
     ; initialize matrix row counter
     MOV [matrix_row_ctr], AL
+    
 
     matrix_row:
         ; stores counter for row of matrix in row_ctr
         ;MOV [matrix_row_ctr], CL
         ; CL initialized for the loop
+        INC AL
         MOV [matrix_col_ctr], AL
 
         matrix_col:
@@ -126,7 +128,9 @@ main:
                 NEWLINE
                 NEWLINE
                 MOV [avg], EBX
-                ; TODO: need to reset sum to 0 somewhere here
+                ; TODO: need to reset sum to 0 somewhere here (DONE)
+                MOV AL,0
+                MOV [sum], AL
                 
             MOV CL, [matrix_col_ctr]
         
