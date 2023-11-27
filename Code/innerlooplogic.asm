@@ -9,6 +9,7 @@ sum db 0 ; sum
 matrix_size db 6 ; size of matrix ( 6x6 ), but should be depending on input in C
 increment_row db 0 ;incrementer for next row
 avg db 0
+temp_ebx db 0
 
 section .text
 global main
@@ -24,7 +25,7 @@ main:
     MOV EDX, 0
     ;Testing moving of array
     INC EBX
-        ;MOV EBX, 1 ;should be 14
+        MOV EBX, 6 ;should be 14
         ;MOV EBX, 3 ;should be 13
     MOV CL, [matrix_windowsize]
     window_row:             
@@ -69,7 +70,11 @@ main:
         PRINT_STRING  "Average: "
         PRINT_DEC 1, eax ;replace with replacing new array with new value
         MOV [avg], eax
-        ; average should have these outputs: 
+        
+        ;increment counter for matrix row
+        MOV AL, [matrix_size]
+        ADD [temp_ebx], AL
+        MOV BL, [temp_ebx]
        
     
     ;once it iterates through the entire 3x3 window

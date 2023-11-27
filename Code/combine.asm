@@ -21,7 +21,7 @@ section .text
 global main
 main:
     MOV EAX, 0
-    
+    MOV EBX, -1
     ;initialize empty counter
     MOV ECX, 0x0
     ; initializes the number of 3x3 window moves
@@ -41,14 +41,13 @@ main:
         ;CL initialized for matrix column loop
         MOV CL, [patternCtr]
         matrix_col: 
+                   INC EBX
                    ;stores the counter for column  of matrix in colCtr as CL as initialized for sample window ROW loop
                    MOV [matrixColCtr], CL
                    
                    ;CL initialized for ROW sample window loop
                    MOV CL, [matrix_windowsize]
                    window_row: 
-                               ;temporary counter just to check if it passes through window_col 3 times
-                              MOV EAX, 0
                               ;stores the counter for row of matrix in windowRowCtr as CL as initialized for sample window COL loop
                               MOV [windowRowCtr], CL
                               ;CL initialized for COL sample window loop
