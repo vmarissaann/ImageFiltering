@@ -49,18 +49,18 @@ main:
     ADD AL, 1
     MOV [pattern_ctr], AL
 
-    ; initialize loop counter
-    MOV CL, [pattern_ctr]
+    ; initialize matrix row counter
+    MOV [matrix_row_ctr], AL
 
     matrix_row:
         ; stores counter for row of matrix in row_ctr
-        MOV [matrix_row_ctr], CL
+        ;MOV [matrix_row_ctr], CL
         ; CL initialized for the loop
-        MOV CL, [pattern_ctr]
+        MOV [matrix_col_ctr], AL
 
         matrix_col:
             ; stores counter for column of matrix 
-            MOV [matrix_col_ctr], CL
+            ;MOV [matrix_col_ctr], CL
             ; CL initialized for row of window
             MOV CL, [window_size]
 
@@ -133,7 +133,10 @@ main:
         ; TODO: change this so that it loops accordingly
         ; this is a placeholder to test if the problem was the range
         ; it was the range lol so we need to rework it with a jump
-        CMP EDX, 0
+        MOV AL, [matrix_col_ctr]
+        SUB AL, 1
+        MOV [matrix_col_ctr], AL
+        CMP EAX, 0
         JNZ matrix_col
         
         MOV AL, [matrix_size]
@@ -145,7 +148,10 @@ main:
     ; TODO: change this so that it loops accordingly
     ; this is a placeholder to test if the problem was the range
     ; it was the range lol so we need to rework it with a jump
-    CMP EDX, 0
+    MOV AL, [matrix_row_ctr]
+    SUB AL, 1
+    MOV [matrix_row_ctr], AL
+    CMP EAX, 0
     JNZ matrix_row
     
     xor eax, eax
