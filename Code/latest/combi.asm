@@ -13,6 +13,7 @@ move_window dd 0
 sum db 0 
 avg db 0
 temp_ebx db 0
+holder_ebx db 0
 pattern_ctr db 0 ; stores number of times the window moves
 
 ; matrix info
@@ -68,6 +69,8 @@ main:
             SUB EAX, 1
             MOV [move_window], EAX
             
+            MOV BL, [holder_ebx]
+            
             window_row:
                 ; stores counter for row (3)
                 MOV [window_row_ctr], CL
@@ -96,6 +99,7 @@ main:
                 MOV CL, [window_row_ctr]
 
             loop window_row
+            
             ; TODO: find what is affecting the sum, it should be 15
             PRINT_STRING  "Sum: "
             PRINT_DEC 1, sum
@@ -129,6 +133,9 @@ main:
                 MOV [sum], AL
                 
             MOV CL, [matrix_col_ctr]
+        MOV AL, [holder_ebx]
+        INC AL
+        MOV [holder_ebx], AL
         
         ; TODO: change this so that it loops accordingly
         ; this is a placeholder to test if the problem was the range
