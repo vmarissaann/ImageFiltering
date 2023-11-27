@@ -58,6 +58,9 @@ main:
         ; CL initialized for the loop
         MOV AL, [pattern_ctr]
         MOV [matrix_col_ctr], AL
+        
+         MOV AL, [temp_ebx]
+         ADD [holder_ebx], AL
 
         matrix_col:
        
@@ -69,6 +72,7 @@ main:
             SUB EAX, 1
             MOV [move_window], EAX
             
+           
             MOV BL, [holder_ebx]
             
             window_row:
@@ -145,6 +149,10 @@ main:
         MOV [matrix_col_ctr], AL
         CMP EAX, 0
         JNZ matrix_col
+        
+        ;initialize holder ebx to be 0 again to start with array 0 in window 3x3
+        MOV AL, 0
+        MOV [holder_ebx],AL
         
         MOV AL, [matrix_size]
         ADD [temp_ebx], AL
