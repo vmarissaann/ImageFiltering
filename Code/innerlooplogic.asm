@@ -8,6 +8,7 @@ matrix db 1, 4, 0, 1, 3, 1, 2, 2, 4, 2, 2, 3,1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 2, 2,
 sum db 0 ; sum
 matrix_size db 6 ; size of matrix ( 6x6 ), but should be depending on input in C
 increment_row db 0 ;incrementer for next row
+avg db 0
 
 section .text
 global main
@@ -19,9 +20,10 @@ main:
     ;initializing registers to be 0
     MOV EAX, 0 ; reserved for division operation
     MOV ECX, 0
-    MOV EBX, 0
+    MOV EBX, -1
     MOV EDX, 0
     ;Testing moving of array
+    INC EBX
         ;MOV EBX, 1 ;should be 14
         ;MOV EBX, 3 ;should be 13
     MOV CL, [matrix_windowsize]
@@ -66,6 +68,8 @@ main:
         .done:
         PRINT_STRING  "Average: "
         PRINT_DEC 1, eax ;replace with replacing new array with new value
+        MOV [avg], eax
+        ; average should have these outputs: 
        
     
     ;once it iterates through the entire 3x3 window
